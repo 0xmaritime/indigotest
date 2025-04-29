@@ -46,7 +46,7 @@ const EngagementAnalytics = () => {
   return (
     <div className="text-gray-800">
       <h2 className="text-2xl font-bold mb-6">Engagement Analytics</h2>
-      <div className="flex flex-col gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Daily Active Users */}
         <div className="bg-white p-4 rounded-xl shadow-sm">
           <div className="flex justify-between items-center mb-2">
@@ -169,17 +169,6 @@ const EngagementAnalytics = () => {
             </div>
           </div>
           
-          <div className="absolute right-4 top-4 flex space-x-1">
-            <div className="w-10 h-10 bg-blue-100 rounded p-1 flex items-center justify-center">
-              <img src="/api/placeholder/32/32" alt="Icon 1" className="w-8 h-8" />
-            </div>
-            <div className="w-10 h-10 bg-blue-100 rounded p-1 flex items-center justify-center">
-              <img src="/api/placeholder/32/32" alt="Icon 2" className="w-8 h-8" />
-            </div>
-            <div className="w-10 h-10 bg-blue-100 rounded p-1 flex items-center justify-center">
-              <img src="/api/placeholder/32/32" alt="Icon 3" className="w-8 h-8" />
-            </div>
-          </div>
           
           <div className="w-full h-80">
             <ResponsiveContainer width="100%" height="100%">

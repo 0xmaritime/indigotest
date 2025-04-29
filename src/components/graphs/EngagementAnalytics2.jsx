@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
@@ -52,9 +53,9 @@ const EngagementAnalytics2 = () => {
   ];
 
   return (
-    <div className="bg-black text-white">
-      <h2 className="text-4xl font-bold py-6 px-4">Engagement analytics</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-1">
+    <div className="text-gray-800">
+      <h2 className="text-2xl font-bold mb-6">Engagement Analytics</h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Daily Active Users */}
         <div className="bg-gray-900 p-4 rounded">
           <div className="flex justify-between items-center mb-2">

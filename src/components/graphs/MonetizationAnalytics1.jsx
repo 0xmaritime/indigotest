@@ -59,7 +59,7 @@ const MonetizationAnalytics = () => {
   return (
     <div className="text-gray-800">
       <h2 className="text-2xl font-bold mb-6">Monetization Analytics</h2>
-      <div className="flex flex-col gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Daily Revenue */}
         <div className="bg-white p-4 rounded-xl shadow-sm">
           <div className="flex justify-between items-center mb-2">
@@ -118,24 +118,24 @@ const MonetizationAnalytics = () => {
                 data={dailyRevenueData}
                 margin={{ top: 5, right: 5, left: 0, bottom: 5 }}
               >
-                <CartesianGrid stroke="#333" strokeDasharray="3 3" vertical={false} />
+                <CartesianGrid stroke="#e5e7eb" strokeDasharray="3 3" vertical={false} />
                 <XAxis 
                   dataKey="date" 
-                  tick={{ fill: '#888', fontSize: 10 }}
-                  axisLine={{ stroke: '#333' }}
+                  tick={{ fill: '#6b7280', fontSize: 10 }}
+                  axisLine={{ stroke: '#e5e7eb' }}
                   tickLine={false}
                 />
                 <YAxis
-                  tick={{ fill: '#888', fontSize: 10 }}
+                  tick={{ fill: '#6b7280', fontSize: 10 }}
                   domain={[0, 500000]}
                   ticks={[0, 100000, 200000, 300000, 400000, 500000]}
                   tickFormatter={(value) => value === 0 ? '0' : `${value/1000}k`}
-                  axisLine={{ stroke: '#333' }}
+                  axisLine={{ stroke: '#e5e7eb' }}
                   tickLine={false}
                 />
                 <Tooltip
-                  contentStyle={{ backgroundColor: '#333', borderRadius: '4px', border: 'none' }}
-                  labelStyle={{ color: '#fff' }}
+                  contentStyle={{ backgroundColor: '#f9fafb', borderRadius: '4px', border: '1px solid #e5e7eb' }}
+                  labelStyle={{ color: '#111827' }}
                   formatter={(value) => [value.toLocaleString(), '']}
                 />
                 <Line
@@ -181,7 +181,7 @@ const MonetizationAnalytics = () => {
               </span>
             </div>
             <div className="flex space-x-2">
-              <button className="text-white">
+              <button className="text-gray-800">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                   <path fillRule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clipRule="evenodd" />
                 </svg>
@@ -194,7 +194,7 @@ const MonetizationAnalytics = () => {
               <div className="text-gray-400 text-sm mb-1">Developer Products</div>
               <div className="flex items-center">
                 <span className="mr-2">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-white" viewBox="0 0 20 20" fill="currentColor">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-gray-600" viewBox="0 0 20 20" fill="currentColor">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" clipRule="evenodd" />
                   </svg>
                 </span>
@@ -281,24 +281,24 @@ const MonetizationAnalytics = () => {
                 data={revenueSourcesData}
                 margin={{ top: 5, right: 5, left: 0, bottom: 5 }}
               >
-                <CartesianGrid stroke="#333" strokeDasharray="3 3" vertical={false} />
+                <CartesianGrid stroke="#e5e7eb" strokeDasharray="3 3" vertical={false} />
                 <XAxis 
                   dataKey="date" 
-                  tick={{ fill: '#888', fontSize: 10 }}
-                  axisLine={{ stroke: '#333' }}
+                  tick={{ fill: '#6b7280', fontSize: 10 }}
+                  axisLine={{ stroke: '#e5e7eb' }}
                   tickLine={false}
                 />
                 <YAxis
-                  tick={{ fill: '#888', fontSize: 10 }}
+                  tick={{ fill: '#6b7280', fontSize: 10 }}
                   domain={[0, 500000]}
                   ticks={[0, 100000, 200000, 300000, 400000, 500000]}
                   tickFormatter={(value) => value === 0 ? '0' : `${value/1000}k`}
-                  axisLine={{ stroke: '#333' }}
+                  axisLine={{ stroke: '#e5e7eb' }}
                   tickLine={false}
                 />
                 <Tooltip
-                  contentStyle={{ backgroundColor: '#333', borderRadius: '4px', border: 'none' }}
-                  labelStyle={{ color: '#fff' }}
+                  contentStyle={{ backgroundColor: '#f9fafb', borderRadius: '4px', border: '1px solid #e5e7eb' }}
+                  labelStyle={{ color: '#111827' }}
                   formatter={(value) => [value.toLocaleString(), '']}
                 />
                 <Line
