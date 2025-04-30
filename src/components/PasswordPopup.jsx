@@ -7,7 +7,6 @@ const PasswordPopup = ({ onSuccess }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (password === import.meta.env.VITE_APP_PASSWORD) {
-      localStorage.setItem('isAuthenticated', 'true');
       onSuccess();
     } else {
       setError('Incorrect password');
