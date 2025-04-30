@@ -23,16 +23,16 @@ function SalesFunnelVisual() {
   };
 
   return (
-    <div className="bg-white shadow rounded-lg p-6 mb-6">
-      <h2 className="text-xl font-semibold mb-4">Sales Funnel Visualization</h2>
+    <div className="bg-white shadow rounded-lg p-4 sm:p-6 mb-6">
+      <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">Sales Funnel Visualization</h2>
       
-      <div className="space-y-6">
+      <div className="space-y-4 sm:space-y-6">
         <div>
-          <div className="flex justify-between mb-2">
-            <span className="font-medium">Leads</span>
-            <span>{funnelData.leads}</span>
+          <div className="flex justify-between mb-1 sm:mb-2">
+            <span className="text-sm sm:text-base font-medium">Leads</span>
+            <span className="text-sm sm:text-base">{funnelData.leads}</span>
           </div>
-          <div className="h-8 bg-gray-200 rounded-full overflow-hidden">
+          <div className="h-6 sm:h-8 bg-gray-200 rounded-full overflow-hidden">
             <div 
               className="h-full bg-primary-500 rounded-full"
               style={{ width: getBarWidth(funnelData.leads) }}
@@ -41,11 +41,14 @@ function SalesFunnelVisual() {
         </div>
         
         <div>
-          <div className="flex justify-between mb-2">
-            <span className="font-medium">Responses</span>
-            <span>{funnelData.responses} ({conversionRates.leadsToResponses}% of leads)</span>
+          <div className="flex justify-between mb-1 sm:mb-2">
+            <span className="text-sm sm:text-base font-medium">Responses</span>
+            <span className="text-sm sm:text-base">
+              {funnelData.responses} <span className="hidden sm:inline">({conversionRates.leadsToResponses}% of leads)</span>
+              <span className="sm:hidden">({conversionRates.leadsToResponses}%)</span>
+            </span>
           </div>
-          <div className="h-8 bg-gray-200 rounded-full overflow-hidden">
+          <div className="h-6 sm:h-8 bg-gray-200 rounded-full overflow-hidden">
             <div 
               className="h-full bg-secondary-500 rounded-full"
               style={{ width: getBarWidth(funnelData.responses) }}
@@ -54,11 +57,14 @@ function SalesFunnelVisual() {
         </div>
         
         <div>
-          <div className="flex justify-between mb-2">
-            <span className="font-medium">Negotiations</span>
-            <span>{funnelData.negotiations} ({conversionRates.responsesToNegotiations}% of responses)</span>
+          <div className="flex justify-between mb-1 sm:mb-2">
+            <span className="text-sm sm:text-base font-medium">Negotiations</span>
+            <span className="text-sm sm:text-base">
+              {funnelData.negotiations} <span className="hidden sm:inline">({conversionRates.responsesToNegotiations}% of responses)</span>
+              <span className="sm:hidden">({conversionRates.responsesToNegotiations}%)</span>
+            </span>
           </div>
-          <div className="h-8 bg-gray-200 rounded-full overflow-hidden">
+          <div className="h-6 sm:h-8 bg-gray-200 rounded-full overflow-hidden">
             <div 
               className="h-full bg-accent-500 rounded-full"
               style={{ width: getBarWidth(funnelData.negotiations) }}
@@ -67,11 +73,14 @@ function SalesFunnelVisual() {
         </div>
         
         <div>
-          <div className="flex justify-between mb-2">
-            <span className="font-medium">Acquisitions</span>
-            <span>{funnelData.acquisitions} ({conversionRates.negotiationsToAcquisitions}% of negotiations)</span>
+          <div className="flex justify-between mb-1 sm:mb-2">
+            <span className="text-sm sm:text-base font-medium">Acquisitions</span>
+            <span className="text-sm sm:text-base">
+              {funnelData.acquisitions} <span className="hidden sm:inline">({conversionRates.negotiationsToAcquisitions}% of negotiations)</span>
+              <span className="sm:hidden">({conversionRates.negotiationsToAcquisitions}%)</span>
+            </span>
           </div>
-          <div className="h-8 bg-gray-200 rounded-full overflow-hidden">
+          <div className="h-6 sm:h-8 bg-gray-200 rounded-full overflow-hidden">
             <div 
               className="h-full bg-success-500 rounded-full"
               style={{ width: getBarWidth(funnelData.acquisitions) }}
@@ -79,13 +88,13 @@ function SalesFunnelVisual() {
           </div>
         </div>
         
-        <div className="pt-4 border-t border-gray-200">
+        <div className="pt-3 sm:pt-4 border-t border-gray-200">
           <div className="flex justify-between items-center">
-            <span className="font-medium">Overall Conversion Rate:</span>
-            <span className="text-lg font-semibold">{conversionRates.overallConversion}%</span>
+            <span className="text-sm sm:text-base font-medium">Overall Conversion:</span>
+            <span className="text-base sm:text-lg font-semibold">{conversionRates.overallConversion}%</span>
           </div>
-          <p className="text-sm text-gray-600 mt-2">
-            From initial leads to final acquisitions
+          <p className="text-xs sm:text-sm text-gray-600 mt-1 sm:mt-2">
+            From leads to acquisitions
           </p>
         </div>
       </div>

@@ -1,6 +1,6 @@
 import { Routes, Route, Link } from 'react-router-dom';
 import TaskPage from './pages/TaskPage';
-import SolutionPage from './pages/SolutionPage';
+import AnalysisPage from './pages/AnalysisPage';
 import RobuxConverter from './components/RobuxConverter';
 
 function App() {
@@ -15,7 +15,7 @@ function App() {
                 <Link to="/" className="text-gray-700 hover:text-primary-500 font-medium">Task</Link>
               </li>
               <li>
-                <Link to="/solution" className="text-gray-700 hover:text-primary-500 font-medium">Solution</Link>
+                <Link to="/analysis" className="text-gray-700 hover:text-primary-500 font-medium">Analysis</Link>
               </li>
             </ul>
           </nav>
@@ -25,7 +25,7 @@ function App() {
         <RobuxConverter />
         <Routes>
           <Route path="/" element={<TaskPage />} />
-          <Route path="/solution" element={<SolutionPage />} />
+          <Route path="/analysis" element={<AnalysisPage />} />
         </Routes>
       </div>
     </div>

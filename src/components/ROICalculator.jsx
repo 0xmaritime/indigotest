@@ -10,6 +10,7 @@ function ROICalculator() {
   const [purchasePrice, setPurchasePrice] = useState(100000);
   const [liveOpsPercent, setLiveOpsPercent] = useState(20);
   const [targetROI, setTargetROI] = useState(300);
+  const [revenueDropoff, setRevenueDropoff] = useState(0);
   
   const [calculatedROI, setCalculatedROI] = useState(0);
   const [maxPurchasePrice, setMaxPurchasePrice] = useState(0);
@@ -22,13 +23,35 @@ function ROICalculator() {
     let annualRevUSD = 0;
     
     if (revenueType === 'daily') {
-      // Project annual revenue from daily average
+      // Project annual revenue from daily average with potential dropoff
       const dailyRevenueUSD = dailyRevenueRobux * ROBUX_TO_USD;
-      annualRevUSD = dailyRevenueUSD * 365;
+      if (revenueDropoff > 0) {
+        // Calculate total revenue with linear dropoff
+        const monthlyRev = [];
+        let currentRev = dailyRevenueUSD * 30; // Starting monthly revenue
+        for (let i = 0; i < 12; i++) {
+          monthlyRev.push(currentRev);
+          currentRev *= (1 - (revenueDropoff/100)/12); // Apply dropoff gradually
+        }
+        annualRevUSD = monthlyRev.reduce((sum, rev) => sum + rev, 0);
+      } else {
+        annualRevUSD = dailyRevenueUSD * 365;
+      }
     } else {
-      // Project annual revenue from monthly total (multiply by 12)
+      // Project annual revenue from monthly total with potential dropoff
       const monthlyRevenueUSD = monthlyRevenueRobux * ROBUX_TO_USD;
-      annualRevUSD = monthlyRevenueUSD * 12;
+      if (revenueDropoff > 0) {
+        // Calculate total revenue with linear dropoff
+        let total = 0;
+        let currentRev = monthlyRevenueUSD;
+        for (let i = 0; i < 12; i++) {
+          total += currentRev;
+          currentRev *= (1 - revenueDropoff/100); // Apply full dropoff each month
+        }
+        annualRevUSD = total;
+      } else {
+        annualRevUSD = monthlyRevenueUSD * 12;
+      }
     }
     
     // Calculate LiveOps costs based on annual revenue
@@ -50,47 +73,47 @@ function ROICalculator() {
     setCalculatedROI(roi);
     setMaxPurchasePrice(maxPrice);
     
-  }, [revenueType, dailyRevenueRobux, monthlyRevenueRobux, purchasePrice, liveOpsPercent, targetROI]);
+  }, [revenueType, dailyRevenueRobux, monthlyRevenueRobux, purchasePrice, liveOpsPercent, targetROI, revenueDropoff]);
 
   return (
-    <div className="bg-white shadow rounded-lg p-6 mb-6">
-      <h2 className="text-xl font-semibold mb-4">ROI Calculator</h2>
+    <div className="bg-white shadow rounded-lg p-4 sm:p-6 mb-6">
+      <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">ROI Calculator</h2>
       
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="space-y-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+        <div className="space-y-3 sm:space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
               Revenue Input Type
             </label>
-            <div className="flex space-x-4">
+            <div className="flex flex-col sm:flex-row sm:space-x-4 space-y-2 sm:space-y-0">
               <label className="inline-flex items-center">
                 <input
                   type="radio"
-                  className="form-radio"
+                  className="form-radio h-4 w-4"
                   name="revenueType"
                   value="daily"
                   checked={revenueType === 'daily'}
                   onChange={() => setRevenueType('daily')}
                 />
-                <span className="ml-2">Daily Average Revenue</span>
+                <span className="ml-2 text-xs sm:text-sm">Daily Average Revenue</span>
               </label>
               <label className="inline-flex items-center">
                 <input
                   type="radio"
-                  className="form-radio"
+                  className="form-radio h-4 w-4"
                   name="revenueType"
                   value="monthly"
                   checked={revenueType === 'monthly'}
                   onChange={() => setRevenueType('monthly')}
                 />
-                <span className="ml-2">Monthly Total Revenue</span>
+                <span className="ml-2 text-xs sm:text-sm">Monthly Total Revenue</span>
               </label>
             </div>
           </div>
           
           {revenueType === 'daily' ? (
             <div>
-              <label htmlFor="dailyRevenueRobux" className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="dailyRevenueRobux" className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
                 Average Daily Revenue (Robux)
               </label>
               <input
@@ -98,7 +121,7 @@ function ROICalculator() {
                 id="dailyRevenueRobux"
                 value={dailyRevenueRobux}
                 onChange={(e) => setDailyRevenueRobux(Number(e.target.value))}
-                className="px-3 py-2 border border-gray-300 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-primary-500"
+                className="px-3 py-2 text-sm sm:text-base border border-gray-300 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-primary-500"
               />
               <p className="text-xs text-gray-500 mt-1">
                 = ${(dailyRevenueRobux * ROBUX_TO_USD).toFixed(2)} USD per day
@@ -106,7 +129,7 @@ function ROICalculator() {
             </div>
           ) : (
             <div>
-              <label htmlFor="monthlyRevenueRobux" className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="monthlyRevenueRobux" className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
                 Monthly Total Revenue (Robux)
               </label>
               <input
@@ -114,7 +137,7 @@ function ROICalculator() {
                 id="monthlyRevenueRobux"
                 value={monthlyRevenueRobux}
                 onChange={(e) => setMonthlyRevenueRobux(Number(e.target.value))}
-                className="px-3 py-2 border border-gray-300 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-primary-500"
+                className="px-3 py-2 text-sm sm:text-base border border-gray-300 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-primary-500"
               />
               <p className="text-xs text-gray-500 mt-1">
                 = ${(monthlyRevenueRobux * ROBUX_TO_USD).toFixed(2)} USD per month
@@ -123,49 +146,67 @@ function ROICalculator() {
           )}
           
           <div>
-            <label htmlFor="purchasePrice" className="block text-sm font-medium text-gray-700 mb-1">
-              Purchase Price (USD)
-            </label>
-            <input
-              type="number"
-              id="purchasePrice"
-              value={purchasePrice}
-              onChange={(e) => setPurchasePrice(Number(e.target.value))}
-              className="px-3 py-2 border border-gray-300 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-primary-500"
-            />
+              <label htmlFor="purchasePrice" className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
+                Purchase Price (USD)
+              </label>
+              <input
+                type="number"
+                id="purchasePrice"
+                value={purchasePrice}
+                onChange={(e) => setPurchasePrice(Number(e.target.value))}
+                className="px-3 py-2 text-sm sm:text-base border border-gray-300 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-primary-500"
+              />
           </div>
           
           <div>
-            <label htmlFor="liveOpsPercent" className="block text-sm font-medium text-gray-700 mb-1">
-              LiveOps Expenses (%)
-            </label>
-            <input
-              type="number"
-              id="liveOpsPercent"
-              value={liveOpsPercent}
-              onChange={(e) => setLiveOpsPercent(Number(e.target.value))}
-              className="px-3 py-2 border border-gray-300 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-primary-500"
-            />
+              <label htmlFor="liveOpsPercent" className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
+                LiveOps Expenses (%)
+              </label>
+              <input
+                type="number"
+                id="liveOpsPercent"
+                value={liveOpsPercent}
+                onChange={(e) => setLiveOpsPercent(Number(e.target.value))}
+                className="px-3 py-2 text-sm sm:text-base border border-gray-300 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-primary-500"
+              />
           </div>
           
           <div>
-            <label htmlFor="targetROI" className="block text-sm font-medium text-gray-700 mb-1">
-              Target ROI (%)
-            </label>
-            <input
-              type="number"
-              id="targetROI"
-              value={targetROI}
-              onChange={(e) => setTargetROI(Number(e.target.value))}
-              className="px-3 py-2 border border-gray-300 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-primary-500"
-            />
+              <label htmlFor="targetROI" className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
+                Target ROI (%)
+              </label>
+              <input
+                type="number"
+                id="targetROI"
+                value={targetROI}
+                onChange={(e) => setTargetROI(Number(e.target.value))}
+                className="px-3 py-2 text-sm sm:text-base border border-gray-300 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-primary-500"
+              />
+          </div>
+          
+          <div>
+              <label htmlFor="revenueDropoff" className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
+                Monthly Revenue Dropoff (%)
+              </label>
+              <input
+                type="number"
+                id="revenueDropoff"
+                value={revenueDropoff}
+                onChange={(e) => setRevenueDropoff(Number(e.target.value))}
+                className="px-3 py-2 text-sm sm:text-base border border-gray-300 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-primary-500"
+              />
+              <p className="text-xs text-gray-500 mt-1">
+                {revenueDropoff > 0 ? 
+                  `Revenue will decrease by ${revenueDropoff}% each month` : 
+                  'No revenue dropoff applied'}
+              </p>
           </div>
         </div>
         
-        <div className="flex flex-col justify-center bg-gray-50 p-6 rounded-lg">
-          <div className="mb-6">
-            <h3 className="text-lg font-medium mb-2">Projected Annual Revenue</h3>
-            <div className="text-xl font-semibold">
+        <div className="flex flex-col justify-center bg-gray-50 p-4 sm:p-6 rounded-lg mt-4 sm:mt-0">
+          <div className="mb-4 sm:mb-6">
+            <h3 className="text-base sm:text-lg font-medium mb-1 sm:mb-2">Projected Annual Revenue</h3>
+            <div className="text-lg sm:text-xl font-semibold">
               ${annualRevenueUSD.toLocaleString(undefined, {maximumFractionDigits: 2})}
             </div>
             <p className="text-sm text-gray-600 mt-1">
@@ -177,8 +218,8 @@ function ROICalculator() {
           </div>
           
           <div className="mb-6">
-            <h3 className="text-lg font-medium mb-2">Projected ROI</h3>
-            <div className={`text-3xl font-bold ${calculatedROI >= targetROI ? 'text-success-500' : 'text-danger-500'}`}>
+            <h3 className="text-base sm:text-lg font-medium mb-1 sm:mb-2">Projected ROI</h3>
+            <div className={`text-2xl sm:text-3xl font-bold ${calculatedROI >= targetROI ? 'text-success-500' : 'text-danger-500'}`}>
               {calculatedROI.toFixed(2)}%
             </div>
             <p className="text-sm text-gray-600 mt-1">
@@ -189,8 +230,8 @@ function ROICalculator() {
           </div>
           
           <div>
-            <h3 className="text-lg font-medium mb-2">Maximum Purchase Price</h3>
-            <div className="text-2xl font-bold text-secondary-500">
+            <h3 className="text-base sm:text-lg font-medium mb-1 sm:mb-2">Maximum Purchase Price</h3>
+            <div className="text-xl sm:text-2xl font-bold text-secondary-500">
               ${maxPurchasePrice.toLocaleString(undefined, {maximumFractionDigits: 2})}
             </div>
             <p className="text-sm text-gray-600 mt-1">

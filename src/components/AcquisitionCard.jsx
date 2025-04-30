@@ -41,57 +41,57 @@ function AcquisitionCard({ number, data, showROI = false }) {
   }, [number]);
 
   return (
-    <div className="bg-white shadow rounded-lg p-4 mb-6">
-      <h2 className="text-xl font-semibold mb-4">Acquisition {number}</h2>
-      <div className="flex flex-col md:flex-row gap-6">
+    <div className="bg-white shadow rounded-lg p-3 sm:p-4 mb-6">
+      <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">Acquisition {number}</h2>
+      <div className="flex flex-col md:flex-row gap-4 sm:gap-6">
         <div className="flex-1">
-          <h3 className="text-lg font-medium mb-3">Metrics</h3>
-          <div className="grid grid-cols-1 gap-4">
+          <h3 className="text-base sm:text-lg font-medium mb-2 sm:mb-3">Metrics</h3>
+          <div className="grid grid-cols-1 gap-3 sm:gap-4">
             <div>
-              <h4 className="font-medium text-gray-700">Purchase Price</h4>
-              <p className="text-lg">${data.purchasePrice.toLocaleString()}</p>
+              <h4 className="text-sm sm:text-base font-medium text-gray-700">Purchase Price</h4>
+              <p className="text-base sm:text-lg">${data.purchasePrice.toLocaleString()}</p>
             </div>
             <div>
-              <h4 className="font-medium text-gray-700">LiveOps Expenses</h4>
-              <p className="text-lg">{data.liveOpsExpenses}%</p>
+              <h4 className="text-sm sm:text-base font-medium text-gray-700">LiveOps Expenses</h4>
+              <p className="text-base sm:text-lg">{data.liveOpsExpenses}%</p>
             </div>
             <div>
-              <h4 className="font-medium text-gray-700">Day 1 Retention</h4>
-              <p className="text-lg">{data.day1Retention}% {data.day1RetentionChange > 0 ? '↑' : '↓'}{Math.abs(data.day1RetentionChange)}%</p>
+              <h4 className="text-sm sm:text-base font-medium text-gray-700">Day 1 Retention</h4>
+              <p className="text-base sm:text-lg">{data.day1Retention}% {data.day1RetentionChange > 0 ? '↑' : '↓'}{Math.abs(data.day1RetentionChange)}%</p>
             </div>
             <div>
-              <h4 className="font-medium text-gray-700">First Session Retention</h4>
-              <p className="text-lg">{data.firstSessionRetention}% {data.firstSessionRetentionChange > 0 ? '↑' : '↓'}{Math.abs(data.firstSessionRetentionChange)}%</p>
+              <h4 className="text-sm sm:text-base font-medium text-gray-700">First Session Retention</h4>
+              <p className="text-base sm:text-lg">{data.firstSessionRetention}% {data.firstSessionRetentionChange > 0 ? '↑' : '↓'}{Math.abs(data.firstSessionRetentionChange)}%</p>
             </div>
             <div>
-              <h4 className="font-medium text-gray-700">Daily Active Users</h4>
-              <p className="text-lg">{data.dailyActiveUsers.toLocaleString()} {data.dailyActiveUsersChange > 0 ? '↑' : '↓'}{Math.abs(data.dailyActiveUsersChange)}%</p>
+              <h4 className="text-sm sm:text-base font-medium text-gray-700">Daily Active Users</h4>
+              <p className="text-base sm:text-lg">{data.dailyActiveUsers.toLocaleString()} {data.dailyActiveUsersChange > 0 ? '↑' : '↓'}{Math.abs(data.dailyActiveUsersChange)}%</p>
             </div>
             <div>
-              <h4 className="font-medium text-gray-700">Average Daily Revenue</h4>
-              <p className="text-lg">{data.avgDailyRevenue.toLocaleString()} R$ {data.avgDailyRevenueChange > 0 ? '↑' : '↓'}{Math.abs(data.avgDailyRevenueChange)}%</p>
-              <p className="text-sm text-gray-500">(${dailyRevenueUSD.toFixed(2)} USD)</p>
+              <h4 className="text-sm sm:text-base font-medium text-gray-700">Average Daily Revenue</h4>
+              <p className="text-base sm:text-lg">{data.avgDailyRevenue.toLocaleString()} R$ {data.avgDailyRevenueChange > 0 ? '↑' : '↓'}{Math.abs(data.avgDailyRevenueChange)}%</p>
+              <p className="text-xs sm:text-sm text-gray-500">(${dailyRevenueUSD.toFixed(2)} USD)</p>
             </div>
             {showROI && (
               <>
                 <div>
-                  <h4 className="font-medium text-gray-700">Projected ROI</h4>
-                  <p className={`text-lg ${projectedROI >= 300 ? 'text-success-500' : 'text-danger-500'}`}>
+                  <h4 className="text-sm sm:text-base font-medium text-gray-700">Projected ROI</h4>
+                  <p className={`text-base sm:text-lg ${projectedROI >= 300 ? 'text-success-500' : 'text-danger-500'}`}>
                     {projectedROI.toFixed(2)}% {projectedROI >= 300 ? '✅' : '❌'}
                   </p>
                 </div>
                 <div>
-                  <h4 className="font-medium text-gray-700">Max Purchase Price (300% ROI)</h4>
-                  <p className="text-lg">${maxPurchasePrice.toLocaleString(undefined, {maximumFractionDigits: 2})}</p>
+                  <h4 className="text-sm sm:text-base font-medium text-gray-700">Max Price (300% ROI)</h4>
+                  <p className="text-base sm:text-lg">${maxPurchasePrice.toLocaleString(undefined, {maximumFractionDigits: 2})}</p>
                 </div>
               </>
             )}
           </div>
         </div>
         <div className="flex-1">
-          <div className="space-y-6">
+          <div className="space-y-4 sm:space-y-6">
             <div>
-              <h3 className="text-lg font-medium mb-3">Retention Analytics</h3>
+              <h3 className="text-base sm:text-lg font-medium mb-2 sm:mb-3">Retention Analytics</h3>
               <img 
                 src={getImage('retention')}
                 alt={`Acquisition ${number} Retention Analytics`}
@@ -103,7 +103,7 @@ function AcquisitionCard({ number, data, showROI = false }) {
               />
             </div>
             <div>
-              <h3 className="text-lg font-medium mb-3">Monetization Analytics</h3>
+              <h3 className="text-base sm:text-lg font-medium mb-2 sm:mb-3">Monetization Analytics</h3>
               <img 
                 src={getImage('monetization')}
                 alt={`Acquisition ${number} Monetization Analytics`}
@@ -115,7 +115,7 @@ function AcquisitionCard({ number, data, showROI = false }) {
               />
             </div>
             <div>
-              <h3 className="text-lg font-medium mb-3">Engagement Analytics</h3>
+              <h3 className="text-base sm:text-lg font-medium mb-2 sm:mb-3">Engagement Analytics</h3>
               <img 
                 src={getImage('engagement')}
                 alt={`Acquisition ${number} Engagement Analytics`}
