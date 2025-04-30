@@ -1,0 +1,135 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --spacing: 0.25rem;
+  --color-primary-500: #6e45e2;
+  --color-secondary-500: #88d3ce;
+  --color-accent-500: oklch(0.6 0.3 30);
+  --color-success-500: #88d3ce;
+  --color-warning-500: oklch(0.75 0.2 80);
+  --color-danger-500: oklch(0.65 0.25 30);
+  --color-gray-50: oklch(0.97 0.01 240);
+  --color-gray-100: oklch(0.9 0.01 240);
+  --color-gray-200: oklch(0.85 0.01 240);
+  --color-gray-300: oklch(0.75 0.01 240);
+  --color-gray-400: oklch(0.65 0.01 240);
+  --color-gray-500: #5d5d5d;
+  --color-gray-600: oklch(0.4 0.01 240);
+  --color-gray-700: oklch(0.3 0.01 240);
+  --color-gray-800: oklch(0.2 0.01 240);
+  --color-gray-900: oklch(0.1 0.01 240);
+}
+
+/* Financial styling */
+.financial-positive {
+  color: var(--color-success-500);
+  font-weight: 600;
+}
+
+.financial-negative {
+  color: var(--color-danger-500);
+  font-weight: 600;
+}
+
+.financial-neutral {
+  color: var(--color-gray-500);
+}
+
+.roi-low {
+  color: var(--color-danger-500);
+}
+
+.roi-medium {
+  color: var(--color-warning-500);
+}
+
+.roi-high {
+  color: var(--color-success-500);
+}
+
+/* Acquisition comparison */
+.acq1-highlight {
+  background-color: rgba(110, 69, 226, 0.1);
+  border-left: 4px solid var(--color-primary-500);
+  padding: 0.5rem 1rem;
+  margin: 0.5rem 0;
+}
+
+.acq2-highlight {
+  background-color: rgba(136, 211, 206, 0.1);
+  border-left: 4px solid var(--color-secondary-500);
+  padding: 0.5rem 1rem;
+  margin: 0.5rem 0;
+}
+
+/* Strength/weakness highlighting */
+.strength-highlight {
+  background-color: rgba(136, 211, 206, 0.1);
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+}
+
+.weakness-highlight {
+  background-color: rgba(255, 107, 107, 0.1);
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+}
+
+/* Section headers */
+.section-header {
+  color: var(--color-primary-500);
+  border-bottom: 2px solid var(--color-secondary-500);
+  padding-bottom: 0.5rem;
+  margin: 1.5rem 0 1rem;
+}
+
+/* Metric boxes */
+.metric-box {
+  background-color: #f0f7ff;
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 0.5rem 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.metric-box h3 {
+  color: var(--color-primary-500);
+  margin-top: 0;
+}
+
+.metric-value {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--color-gray-500);
+}
+
+/* General highlight */
+.highlight {
+  background-color: #f0f7ff;
+  padding: 1rem;
+  border-left: 4px solid var(--color-primary-500);
+  margin: 1rem 0;
+}
+
+/* Base styles */
+body {
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  color: var(--color-gray-800);
+  background-color: #f8f9fa;
+}
+
+h1, h2, h3, h4 {
+  font-weight: 600;
+}
+
+h2 {
+  @extend .section-header;
+  font-size: 1.5rem;
+}
+
+h3 {
+  color: var(--color-gray-500);
+  font-size: 1.25rem;
+}

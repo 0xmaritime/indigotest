@@ -1,16 +1,34 @@
-import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import MainTask from './pages/MainTask';
+import { Routes, Route, Link } from 'react-router-dom';
+import TaskPage from './pages/TaskPage';
 import SolutionPage from './pages/SolutionPage';
+import RobuxConverter from './components/RobuxConverter';
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<MainTask />} />
-        <Route path="/solution" element={<SolutionPage />} />
-      </Routes>
-    </BrowserRouter>
+    <div className="min-h-screen">
+      <header className="bg-white shadow">
+        <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8 flex justify-between items-center">
+          <h1 className="text-xl font-bold text-gray-900">Game Acquisition Analysis</h1>
+          <nav>
+            <ul className="flex space-x-4">
+              <li>
+                <Link to="/" className="text-gray-700 hover:text-primary-500 font-medium">Task</Link>
+              </li>
+              <li>
+                <Link to="/solution" className="text-gray-700 hover:text-primary-500 font-medium">Solution</Link>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </header>
+      <div className="mx-auto max-w-7xl px-4 pt-4 sm:px-6 lg:px-8">
+        <RobuxConverter />
+        <Routes>
+          <Route path="/" element={<TaskPage />} />
+          <Route path="/solution" element={<SolutionPage />} />
+        </Routes>
+      </div>
+    </div>
   );
 }
 

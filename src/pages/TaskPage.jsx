@@ -1,11 +1,8 @@
 import TaskDescription from '../components/TaskDescription';
 import AcquisitionCard from '../components/AcquisitionCard';
-import SolutionContent from '../components/SolutionContent';
-import AcquisitionMetricsTable from '../components/AcquisitionMetricsTable';
-import ROICalculator from '../components/ROICalculator';
 import SalesFunnelVisual from '../components/SalesFunnelVisual';
 
-function SolutionPage() {
+function TaskPage() {
   const acquisitionData = [
     {
       purchasePrice: 100000,
@@ -37,21 +34,16 @@ function SolutionPage() {
 
   return (
     <div>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-        <AcquisitionCard number={1} data={acquisitionData[0]} showROI={true} />
-        <AcquisitionCard number={2} data={acquisitionData[1]} showROI={true} />
-      </div>
-      
-      <AcquisitionMetricsTable acquisitionData={acquisitionData} />
+      <TaskDescription />
       
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-        <ROICalculator />
-        <SalesFunnelVisual />
+        <AcquisitionCard number={1} data={acquisitionData[0]} />
+        <AcquisitionCard number={2} data={acquisitionData[1]} />
       </div>
       
-      <SolutionContent />
+      <SalesFunnelVisual />
     </div>
   );
 }
 
-export default SolutionPage;
+export default TaskPage;
