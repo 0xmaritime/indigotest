@@ -37,6 +37,7 @@ function App() {
           </a>
         </div>
       </footer>
+      {/* Updated footer - trigger redeploy */}
     </div>
   );
 }
