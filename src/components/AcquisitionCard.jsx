@@ -61,7 +61,7 @@ function AcquisitionCard({ number, data, showROI = false }) {
             </div>
             <div>
               <h4 className="text-sm sm:text-base font-medium text-gray-700">First Session Retention</h4>
-              <p className="text-base sm:text-lg">{data.firstSessionRetention}% {data.firstSessionRetentionChange > 0 ? '↑' : '↓'}{Math.abs(data.firstSessionRetentionChange)}%</p>
+              <p className="text-base sm:text-lg">{data.firstSessionRetention}% ↓{Math.abs(data.firstSessionRetentionChange)}%</p>
             </div>
             <div>
               <h4 className="text-sm sm:text-base font-medium text-gray-700">Daily Active Users</h4>
